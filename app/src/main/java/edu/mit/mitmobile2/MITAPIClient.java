@@ -1,5 +1,18 @@
 package edu.mit.mitmobile2;
 
+import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -13,18 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import edu.mit.mitmobile2.shared.logging.LoggingManager.Timber;
-import org.apache.http.Header;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -35,7 +37,7 @@ public class MITAPIClient {
     public static final String DEV = "dev";
     public static final String TEST = "test";
     public static final String PROD = "prod";
-    public static final String DEFAULT_ENVIRONMENT = "dev";
+    public static final String DEFAULT_ENVIRONMENT = PROD;
     public static String environment = MITAPIClient.DEFAULT_ENVIRONMENT;
     public static int API_SUCCESS = 1;
     public static int API_ERROR = 0;

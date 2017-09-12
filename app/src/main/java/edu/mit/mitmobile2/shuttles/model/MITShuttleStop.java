@@ -6,16 +6,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.mit.mitmobile2.DBAdapter;
 import edu.mit.mitmobile2.Schema;
@@ -39,8 +39,10 @@ public class MITShuttleStop extends MapItem implements Parcelable {
     @Expose
     private String stopNumber;
     @Expose
+    @SerializedName("lat")
     private Double lat;
     @Expose
+    @SerializedName("lon")
     private Double lon;
     @Expose
     private List<MITShuttlePrediction> predictions = new ArrayList<>();
@@ -301,8 +303,9 @@ public class MITShuttleStop extends MapItem implements Parcelable {
         values.put(Schema.Stop.ROUTE_URL, this.routeUrl);
         values.put(Schema.Stop.STOP_TITLE, this.title);
         values.put(Schema.Stop.STOP_NUMBER, this.stopNumber);
-        values.put(Schema.Stop.STOP_LAT, this.lat);
-        values.put(Schema.Stop.STOP_LON, this.lon);
+        // this is a quick fix for a random null lat & lon that are sometimes returned from the API
+        values.put(Schema.Stop.STOP_LAT, this.lat == null ? 42.362369 : this.lat);
+        values.put(Schema.Stop.STOP_LON, this.lon == null ? -71.0903175 : this.lon);
         values.put(Schema.Stop.PREDICTIONS_URL, this.predictionsUrl);
         values.put(Schema.Stop.TIMESTAMP, timestampVal);
     }

@@ -15,7 +15,6 @@ import com.squareup.okhttp.OkHttpClient;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.util.ArrayList;
